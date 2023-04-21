@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Testing System</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="loginText">Вход в систему</string>
+    <string name="regText"><u>Регистрация</u></string>
+    <string name="logText">Войти</string>
+    <string name="passwordText">Пароль</string>
+    <string name="e_mailText">E-mail</string>
 </resources>
