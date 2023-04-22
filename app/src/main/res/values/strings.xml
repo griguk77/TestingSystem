@@ -10,4 +10,8 @@
     <string name="registrText">Регистрация</string>
     <string name="repeatPasswordText">Повторите пароль</string>
     <string name="regText">Зарегистрироваться</string>
+    <string name="subjectName">Название предмета</string>
+    <string name="testDeclaration">Данный тест покажет, каков уровень Ваших знаний в данном предмете</string>
+    <string name="startTest">Начать тест</string>
+    <string name="showAllTestResults">Посмотреть все результаты теста</string>
 </resources>
