@@ -3,8 +3,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="loginText">Вход в систему</string>
-    <string name="regText"><u>Регистрация</u></string>
+    <string name="regLinkText"><u>Регистрация</u></string>
     <string name="logText">Войти</string>
     <string name="passwordText">Пароль</string>
     <string name="e_mailText">E-mail</string>
+    <string name="registrText">Регистрация</string>
+    <string name="repeatPasswordText">Повторите пароль</string>
+    <string name="regText">Зарегистрироваться</string>
 </resources>
