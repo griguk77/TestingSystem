@@ -14,4 +14,11 @@
     <string name="showAllTestResults">Посмотреть все результаты теста</string>
     <string name="helloUser">Здравствуйте, Пользователь!</string>
     <string name="testName"><u>Название теста</u></string>
+    <string name="progress">1/10</string>
+    <string name="questDeclaration">Описание вопроса</string>
+    <string name="variant1">Вариант 1</string>
+    <string name="variant2">Вариант 2</string>
+    <string name="variant3">Вариант 3</string>
+    <string name="variant4">Вариант 4</string>
+    <string name="continueButton">Продолжить</string>
 </resources>
