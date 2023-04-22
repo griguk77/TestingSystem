@@ -21,9 +21,10 @@
     <string name="variant3">Вариант 3</string>
     <string name="variant4">Вариант 4</string>
     <string name="continueButton">Продолжить</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tvResultText">Результат</string>
     <string name="testResult">Результат теста</string>
     <string name="toCatalogText">Перейти к каталогу тестов</string>
+    <string name="allResultsText">Все результаты теста</string>
+    <string name="user">Пользователь</string>
+    <string name="date">Дата</string>
 </resources>
