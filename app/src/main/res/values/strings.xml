@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">Testing System</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="loginText">Вход в систему</string>
     <string name="regLinkText"><u>Регистрация</u></string>
     <string name="logText">Войти</string>
@@ -14,4 +12,6 @@
     <string name="testDeclaration">Данный тест покажет, каков уровень Ваших знаний в данном предмете</string>
     <string name="startTest">Начать тест</string>
     <string name="showAllTestResults">Посмотреть все результаты теста</string>
+    <string name="helloUser">Здравствуйте, Пользователь!</string>
+    <string name="testName"><u>Название теста</u></string>
 </resources>
