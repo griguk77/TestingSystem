@@ -5,11 +5,15 @@ import androidx.room.ForeignKey
 import androidx.room.ForeignKey.CASCADE
 import androidx.room.PrimaryKey
 
-@Entity(foreignKeys = [
-    ForeignKey(entity = Test::class,
-        parentColumns = ["id"],
-        childColumns = ["idTest"],
-        onDelete = CASCADE)])
+@Entity(
+    foreignKeys = [
+        ForeignKey(
+            entity = Test::class,
+            parentColumns = ["id"],
+            childColumns = ["idTest"],
+            onDelete = CASCADE
+        )]
+)
 data class Result(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
