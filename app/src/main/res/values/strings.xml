@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">Testing System</string>
+    <string name="loginText">Вход в систему</string>
+    <string name="regLinkText"><u>Регистрация</u></string>
+    <string name="logText">Войти</string>
+    <string name="passwordText">Пароль</string>
+    <string name="e_mailText">E-mail</string>
+    <string name="registrText">Регистрация</string>
+    <string name="repeatPasswordText">Повторите пароль</string>
+    <string name="regText">Зарегистрироваться</string>
+    <string name="subjectName">Название предмета</string>
+    <string name="testDeclaration">Данный тест покажет, каков уровень Ваших знаний в данном предмете</string>
+    <string name="startTest">Начать тест</string>
+    <string name="showAllTestResults">Посмотреть все результаты теста</string>
+    <string name="helloUser">Здравствуйте, Пользователь!</string>
+    <string name="testName"><u>Название теста</u></string>
+    <string name="progress">1/10</string>
+    <string name="questDeclaration">Описание вопроса</string>
+    <string name="variant1">Вариант 1</string>
+    <string name="variant2">Вариант 2</string>
+    <string name="variant3">Вариант 3</string>
+    <string name="variant4">Вариант 4</string>
+    <string name="continueButton">Продолжить</string>
+    <string name="tvResultText">Результат</string>
+    <string name="testResult">Результат теста</string>
+    <string name="toCatalogText">Перейти к каталогу тестов</string>
+    <string name="allResultsText">Все результаты теста</string>
+    <string name="user">Пользователь</string>
+    <string name="date">Дата</string>
 </resources>
