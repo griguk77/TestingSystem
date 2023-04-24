@@ -39,5 +39,14 @@
         android:id="@+id/testStartFragment"
         android:name="ru.studyguk.testingsystem.presentation.TestStartFragment"
         android:label="fragment_test_start"
-        tools:layout="@layout/fragment_test_start" />
+        tools:layout="@layout/fragment_test_start" >
+        <action
+            android:id="@+id/action_testStartFragment_to_allResultsFragment"
+            app:destination="@id/allResultsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/allResultsFragment"
+        android:name="ru.studyguk.testingsystem.presentation.AllResultsFragment"
+        android:label="fragment_all_results"
+        tools:layout="@layout/fragment_all_results" />
 </navigation>
