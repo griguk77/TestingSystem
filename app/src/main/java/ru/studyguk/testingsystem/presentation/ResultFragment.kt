@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import ru.studyguk.testingsystem.R
 import ru.studyguk.testingsystem.databinding.FragmentResultBinding
 
@@ -25,6 +26,12 @@ class ResultFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentResultBinding.inflate(layoutInflater)
+        binding.buttonShowResultsResult.setOnClickListener {
+            findNavController().navigate(R.id.action_resultFragment_to_allResultsFragment)
+        }
+        binding.buttonToCatalog.setOnClickListener {
+            findNavController().navigate(R.id.action_resultFragment_to_catalogFragment)
+        }
         return binding.root
     }
 

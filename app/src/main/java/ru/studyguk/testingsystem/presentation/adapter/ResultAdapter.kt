@@ -8,15 +8,16 @@ import androidx.recyclerview.widget.RecyclerView
 import data.Result
 import ru.studyguk.testingsystem.R
 
-class ResultAdapter (val list: ArrayList<Result>) : RecyclerView.Adapter<ResultAdapter.MyResult>(){
-    class MyResult (item: View) : RecyclerView.ViewHolder(item) {
+class ResultAdapter(val list: ArrayList<Result>) : RecyclerView.Adapter<ResultAdapter.MyResult>() {
+    class MyResult(item: View) : RecyclerView.ViewHolder(item) {
         val tvUser: TextView = item.findViewById(R.id.textViewUserResult)
         val tvResult: TextView = item.findViewById(R.id.textViewResResult)
         val tvDate: TextView = item.findViewById(R.id.textViewDateResult)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyResult {
-        val myItem = LayoutInflater.from(parent.context).inflate(R.layout.item_results, parent, false)
+        val myItem =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_results, parent, false)
         return ResultAdapter.MyResult(myItem)
     }
 

@@ -65,5 +65,12 @@
         android:id="@+id/resultFragment"
         android:name="ru.studyguk.testingsystem.presentation.ResultFragment"
         android:label="fragment_result"
-        tools:layout="@layout/fragment_result" />
+        tools:layout="@layout/fragment_result" >
+        <action
+            android:id="@+id/action_resultFragment_to_catalogFragment"
+            app:destination="@id/catalogFragment" />
+        <action
+            android:id="@+id/action_resultFragment_to_allResultsFragment"
+            app:destination="@id/allResultsFragment" />
+    </fragment>
 </navigation>

@@ -32,9 +32,9 @@ class AllResultsFragment : Fragment() {
     ): View? {
 
         if (results.size == 0) {
-            results.add(Result(1,2, "sdfhjhd", 73, "22.02.2023"))
-            results.add(Result(2,2, "ersg345", 81, "23.03.2023"))
-            results.add(Result(3,2, "esrfhj348rywe", 57, "05.04.2023"))
+            results.add(Result(1, 2, "sdfhjhd", 73, "22.02.2023"))
+            results.add(Result(2, 2, "ersg345", 81, "23.03.2023"))
+            results.add(Result(3, 2, "esrfhj348rywe", 57, "05.04.2023"))
         }
         val adapter = ResultAdapter(results)
         binding = FragmentAllResultsBinding.inflate(layoutInflater)
