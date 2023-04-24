@@ -30,5 +30,14 @@
         android:id="@+id/catalogFragment"
         android:name="ru.studyguk.testingsystem.presentation.CatalogFragment"
         android:label="fragment_catalog"
-        tools:layout="@layout/fragment_catalog" />
+        tools:layout="@layout/fragment_catalog" >
+        <action
+            android:id="@+id/action_catalogFragment_to_testStartFragment"
+            app:destination="@id/testStartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/testStartFragment"
+        android:name="ru.studyguk.testingsystem.presentation.TestStartFragment"
+        android:label="fragment_test_start"
+        tools:layout="@layout/fragment_test_start" />
 </navigation>
