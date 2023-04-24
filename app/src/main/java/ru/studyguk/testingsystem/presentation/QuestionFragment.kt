@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import ru.studyguk.testingsystem.R
 import ru.studyguk.testingsystem.databinding.FragmentQuestionBinding
 
@@ -25,6 +26,13 @@ class QuestionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentQuestionBinding.inflate(layoutInflater)
+        binding.buttonContinue.setOnClickListener {
+            if (true) {
+                findNavController().navigate(R.id.action_questionFragment_to_resultFragment)
+            } else {
+                //write later
+            }
+        }
         return binding.root
     }
 
