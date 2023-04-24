@@ -29,7 +29,7 @@ class LoginFragment : Fragment() {
         binding.textViewRegistrLink.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registrFragment)
         }
-        binding.buttonLogin.setOnClickListener {
+        binding.buttonLoginLogin.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_catalogFragment)
         }
         return binding.root
