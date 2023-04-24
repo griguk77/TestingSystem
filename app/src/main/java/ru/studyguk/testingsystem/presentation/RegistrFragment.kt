@@ -26,7 +26,7 @@ class RegistrFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentRegistrBinding.inflate(layoutInflater)
-        binding.buttonLogin.setOnClickListener {
+        binding.buttonLoginRegistr.setOnClickListener {
             findNavController().navigate(R.id.action_registrFragment_to_loginFragment)
         }
         return binding.root
