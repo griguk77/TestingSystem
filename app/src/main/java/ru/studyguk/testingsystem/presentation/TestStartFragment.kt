@@ -31,6 +31,9 @@ class TestStartFragment : Fragment() {
         binding.buttonShowResultsStart.setOnClickListener {
             findNavController().navigate(R.id.action_testStartFragment_to_allResultsFragment)
         }
+        binding.buttonStartTest.setOnClickListener {
+            findNavController().navigate(R.id.action_testStartFragment_to_questionFragment)
+        }
         return binding.root
     }
 
