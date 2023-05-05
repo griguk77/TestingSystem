@@ -2,9 +2,10 @@ package domain.usecases
 
 import domain.models.Result
 import domain.models.Test
+import domain.repository.TestRepository
 
-class ShowAllResultsUseCase {
+class ShowAllResultsUseCase (private val testRepository: TestRepository) {
     fun showAllResults(test: Test): List<Result> {
-        TODO()
+        return testRepository.showAllResults(test)
     }
 }

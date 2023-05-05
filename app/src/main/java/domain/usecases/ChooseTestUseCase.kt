@@ -1,9 +1,10 @@
 package domain.usecases
 
 import domain.models.Test
+import domain.repository.TestRepository
 
-class ChooseTestUseCase {
+class ChooseTestUseCase (private val testRepository: TestRepository) {
     fun chooseTest(testName: String): Test {
-        TODO()
+        return testRepository.chooseTest(testName)
     }
 }

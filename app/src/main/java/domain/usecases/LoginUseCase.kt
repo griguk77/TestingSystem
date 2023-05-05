@@ -1,9 +1,10 @@
 package domain.usecases
 
 import domain.models.User
+import domain.repository.TestRepository
 
-class LoginUseCase {
+class LoginUseCase (private val testRepository: TestRepository) {
     fun login(user: User) {
-        TODO()
+        testRepository.login(user)
     }
 }

@@ -2,9 +2,10 @@ package domain.usecases
 
 import domain.models.Question
 import domain.models.Test
+import domain.repository.TestRepository
 
-class StartTestUseCase {
+class StartTestUseCase (private val testRepository: TestRepository) {
     fun startTest(test: Test): Question {
-        TODO()
+        return testRepository.startTest(test)
     }
 }
