@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import data.Test
+import data.models.Test
 import ru.studyguk.testingsystem.R
 
 class TestAdapter(val list: ArrayList<Test>, val listener: OnItemClickListener) :

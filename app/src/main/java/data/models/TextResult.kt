@@ -1,11 +1,11 @@
-package data
+package data.models
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.ForeignKey.CASCADE
 import androidx.room.PrimaryKey
 
-@Entity(
+@Entity(tableName = "text_result",
     foreignKeys = [
         ForeignKey(
             entity = Test::class,
@@ -14,11 +14,11 @@ import androidx.room.PrimaryKey
             onDelete = CASCADE
         )]
 )
-data class Result(
+data class TextResult(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val idTest: Int,
-    val user: String,
-    val points: Int,
-    val date: String
+    val beginPoint: Int,
+    val endPoint: Int,
+    val text: String
 )

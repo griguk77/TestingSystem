@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import data.Result
+import data.models.Result
 import ru.studyguk.testingsystem.R
 
 class ResultAdapter(val list: ArrayList<Result>) : RecyclerView.Adapter<ResultAdapter.MyResult>() {

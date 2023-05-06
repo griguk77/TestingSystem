@@ -6,10 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import ru.studyguk.testingsystem.R
-import ru.studyguk.testingsystem.databinding.FragmentCatalogBinding
-import ru.studyguk.testingsystem.presentation.adapter.TestAdapter
-import data.Result
+import data.models.Result
 import ru.studyguk.testingsystem.databinding.FragmentAllResultsBinding
 import ru.studyguk.testingsystem.presentation.adapter.ResultAdapter
 
