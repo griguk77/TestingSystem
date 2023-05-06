@@ -17,4 +17,6 @@ interface TestRepository {
     fun showAllResults(test: Test): List<Result>
 
     fun startTest(test: Test): Question
+
+    fun openCatalog(): List<Test>
 }

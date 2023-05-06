@@ -8,5 +8,6 @@ data class Test(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val name: String,
-    val declTest: String
+    val declTest: String,
+    val queCount: Int
 )

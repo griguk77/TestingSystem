@@ -36,4 +36,8 @@ object TestRepositoryImpl: TestRepository {
         TODO("Not yet implemented")
     }
 
+    override fun openCatalog(): List<Test> {
+        TODO("Not yet implemented")
+    }
+
 }
