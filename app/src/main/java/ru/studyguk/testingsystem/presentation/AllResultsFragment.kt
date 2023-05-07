@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import data.models.Result
+import domain.models.Result
 import ru.studyguk.testingsystem.databinding.FragmentAllResultsBinding
 import ru.studyguk.testingsystem.presentation.adapter.ResultAdapter
 
@@ -29,9 +29,9 @@ class AllResultsFragment : Fragment() {
     ): View? {
 
         if (results.size == 0) {
-            results.add(Result(1, 2, "sdfhjhd", 73, "22.02.2023"))
-            results.add(Result(2, 2, "ersg345", 81, "23.03.2023"))
-            results.add(Result(3, 2, "esrfhj348rywe", 57, "05.04.2023"))
+            results.add(Result("sdfhjhd", 73, "22.02.2023", "jonjdf"))
+            results.add(Result("ersg345", 81, "23.03.2023", "korv"))
+            results.add(Result("esrfhj348rywe", 57, "05.04.2023", "kjsdfn"))
         }
         val adapter = ResultAdapter(results)
         binding = FragmentAllResultsBinding.inflate(layoutInflater)

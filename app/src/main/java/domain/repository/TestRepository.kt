@@ -4,19 +4,19 @@ import domain.models.*
 
 interface TestRepository {
 
-    fun chooseTest(testName: String): Test
+    fun chooseTest(testName: String): String
 
-    fun continueTest(test: Test): Question
+    fun continueTest(testName: String, queNum: Int): Question
 
-    fun finishTest(test: Test): TextResult
+    fun finishTest(testName: String, point: Int, userName: String): String
 
     fun login(user: User)
 
     fun registr(user: User)
 
-    fun showAllResults(test: Test): List<Result>
+    fun showAllResults(testName: String): List<Result>
 
-    fun startTest(test: Test): Question
+    fun startTest(testName: String, queNum: Int): Question
 
-    fun openCatalog(): List<Test>
+    fun openCatalog(): List<String>
 }

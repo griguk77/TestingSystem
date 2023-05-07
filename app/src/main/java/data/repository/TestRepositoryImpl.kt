@@ -2,21 +2,19 @@ package data.repository
 
 import domain.models.Question
 import domain.models.Result
-import domain.models.Test
-import domain.models.TextResult
 import domain.models.User
 import domain.repository.TestRepository
 
 object TestRepositoryImpl: TestRepository {
-    override fun chooseTest(testName: String): Test {
+    override fun chooseTest(testName: String): String {
         TODO("Not yet implemented")
     }
 
-    override fun continueTest(test: Test): Question {
+    override fun continueTest(testName: String, queNum: Int): Question {
         TODO("Not yet implemented")
     }
 
-    override fun finishTest(test: Test): TextResult {
+    override fun finishTest(testName: String, point: Int, userName: String): String {
         TODO("Not yet implemented")
     }
 
@@ -28,15 +26,15 @@ object TestRepositoryImpl: TestRepository {
         TODO("Not yet implemented")
     }
 
-    override fun showAllResults(test: Test): List<Result> {
+    override fun showAllResults(testName: String): List<Result> {
         TODO("Not yet implemented")
     }
 
-    override fun startTest(test: Test): Question {
+    override fun startTest(testName: String, queNum: Int): Question {
         TODO("Not yet implemented")
     }
 
-    override fun openCatalog(): List<Test> {
+    override fun openCatalog(): List<String> {
         TODO("Not yet implemented")
     }
 

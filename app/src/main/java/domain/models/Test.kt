@@ -1,5 +1,6 @@
 package domain.models
 
+//вероятно не будет использоваться
 data class Test(
     val testNameTest: String,
     val declTest: String,

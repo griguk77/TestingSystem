@@ -1,7 +1,8 @@
 package domain.models
 
 data class Question(
-    val num: Int,
-    val declQuestion: String,
-    val variants: List<String>
+    val queNum: Int,
+    val queText: String,
+    val variants: List<String>,
+    val points: List<Int>
 )

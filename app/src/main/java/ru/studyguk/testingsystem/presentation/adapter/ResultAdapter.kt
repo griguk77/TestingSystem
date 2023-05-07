@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import data.models.Result
+import domain.models.Result
 import ru.studyguk.testingsystem.R
 
 class ResultAdapter(val list: ArrayList<Result>) : RecyclerView.Adapter<ResultAdapter.MyResult>() {
@@ -22,7 +22,7 @@ class ResultAdapter(val list: ArrayList<Result>) : RecyclerView.Adapter<ResultAd
     }
 
     override fun onBindViewHolder(holder: MyResult, position: Int) {
-        holder.tvUser.text = list[position].user
+        holder.tvUser.text = list[position].userName
         holder.tvResult.text = list[position].points.toString()
         holder.tvDate.text = list[position].date
     }

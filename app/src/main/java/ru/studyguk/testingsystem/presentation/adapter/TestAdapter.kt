@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import data.models.Test
 import ru.studyguk.testingsystem.R
 
-class TestAdapter(val list: ArrayList<Test>, val listener: OnItemClickListener) :
+class TestAdapter(val list: ArrayList<String>, val listener: OnItemClickListener) :
     RecyclerView.Adapter<TestAdapter.MyTest>() {
     class MyTest(item: View) : RecyclerView.ViewHolder(item) {
         val textView: TextView = item.findViewById(R.id.textViewTestItem)
@@ -21,7 +21,7 @@ class TestAdapter(val list: ArrayList<Test>, val listener: OnItemClickListener) 
     }
 
     override fun onBindViewHolder(holder: MyTest, position: Int) {
-        val text = list[position].name
+        val text = list[position]
         holder.textView.text = Html.fromHtml(text)
         holder.itemView.setOnClickListener {
             listener.onItemClickListener(list[position])
@@ -31,6 +31,6 @@ class TestAdapter(val list: ArrayList<Test>, val listener: OnItemClickListener) 
     override fun getItemCount() = list.size
 
     interface OnItemClickListener {
-        fun onItemClickListener(test: Test)
+        fun onItemClickListener(testName: String)
     }
 }

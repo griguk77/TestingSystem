@@ -27,5 +27,8 @@ interface TestDao {
     fun getResults(testName: String): LiveData<List<Result>>
 
     @Query("SELECT name FROM test")
-    fun getCatalog(): LiveData<List<Test>>
+    fun getCatalog(): LiveData<List<String>>
+
+    @Query("SELECT queCount FROM test WHERE name == :testName LIMIT 1")
+    fun getQueCount(testName: String): LiveData<Int>
 }
