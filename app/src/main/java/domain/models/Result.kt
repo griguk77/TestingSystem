@@ -1,8 +1,8 @@
 package domain.models
 
 data class Result(
-    val userName: String,
-    val points: Int,
-    val date: String,
-    val testNameResult: String
+    var testName: String,
+    var userName: String,
+    var points: Int,
+    var date: String
 )

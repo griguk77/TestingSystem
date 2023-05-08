@@ -23,7 +23,7 @@ interface TestDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertResult(result: Result)
 
-    @Query("SELECT * FROM result WHERE testName == :testName")
+    @Query("SELECT * FROM result WHERE testName == :testName ORDER BY id DESC")
     fun getResults(testName: String): LiveData<List<Result>>
 
     @Query("SELECT name FROM test")
@@ -31,4 +31,7 @@ interface TestDao {
 
     @Query("SELECT queCount FROM test WHERE name == :testName LIMIT 1")
     fun getQueCount(testName: String): LiveData<Int>
+
+    @Query("SELECT id FROM result WHERE testName == :testName ORDER BY id DESC LIMIT 1")
+    fun getResultId(testName: String): LiveData<Int>
 }
