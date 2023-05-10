@@ -39,11 +39,11 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
         return db.testDao().getTextResult(testName, point)
     }
 
-    override fun login(user: User) {
+    override fun login(user: User): Boolean {
         TODO("Not yet implemented")
     }
 
-    override fun registr(user: User) {
+    override fun registr(user: User): Boolean {
         TODO("Not yet implemented")
     }
 

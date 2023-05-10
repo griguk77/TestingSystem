@@ -8,21 +8,26 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
+import domain.models.User
 import ru.studyguk.testingsystem.R
 import ru.studyguk.testingsystem.databinding.FragmentLoginBinding
 import ru.studyguk.testingsystem.presentation.viewmodel.MainViewModel
+import ru.studyguk.testingsystem.presentation.viewmodel.MainViewModelFactory
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 class LoginFragment : Fragment() {
-    private lateinit var vm: MainViewModel
+
+    lateinit var mainViewModelFactory: MainViewModelFactory
+
+    private var vm: MainViewModel = ViewModelProvider(this, mainViewModelFactory).get(MainViewModel::class.java)
     private lateinit var binding: FragmentLoginBinding
     private var param1: String? = null
     private var param2: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        vm = ViewModelProvider(this).get(MainViewModel::class.java)
         super.onCreate(savedInstanceState)
     }
 
@@ -39,7 +44,20 @@ class LoginFragment : Fragment() {
             findNavController().navigate(R.id.action_loginFragment_to_registrFragment)
         }
         binding.buttonLoginLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_catalogFragment)
+            val user = User(
+                binding.editTextTextEmailAddressLogin.toString(),
+                binding.editTextTextPasswordLogin.toString()
+            )
+            val success = vm.login(user)
+            if (success) {
+                findNavController().navigate(R.id.action_loginFragment_to_catalogFragment)
+            } else {
+                Snackbar.make(
+                    view,
+                    "Вход не выполнен, проверьте введённые данные",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
         }
         super.onViewCreated(view, savedInstanceState)
     }

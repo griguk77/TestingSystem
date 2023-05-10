@@ -11,9 +11,9 @@ interface TestRepository {
 
     fun finishTest(testName: String, point: Int, userName: String): LiveData<String>
 
-    fun login(user: User)
+    fun login(user: User): Boolean
 
-    fun registr(user: User)
+    fun registr(user: User): Boolean
 
     fun showAllResults(testName: String): LiveData<List<Result>>
 
