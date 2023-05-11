@@ -48,7 +48,6 @@ class CatalogFragment : Fragment(), TestAdapter.OnItemClickListener {
         binding = FragmentCatalogBinding.inflate(layoutInflater)
         binding.recyclerViewTests.layoutManager = LinearLayoutManager(this.context)
         binding.recyclerViewTests.adapter = adapter
-        Log.d("RRR", vm.userName.value.toString())
 
         vm.userName.observe(viewLifecycleOwner) {
             binding.textViewHelloUser.text = "Здравствуйте, $it!"

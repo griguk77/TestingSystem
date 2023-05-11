@@ -30,7 +30,15 @@ class MainViewModel(
         val success = true
         if (success) {
             _userName.value = user.name.substringBefore('@')
-            Log.d("RRR", _userName.value.toString())
+        }
+        return success
+    }
+
+    fun registr(user: User): Boolean {
+        //val success = registrUseCase.registr(user)
+        val success = false
+        if (success) {
+            _userName.value = user.name.substringBefore('@')
         }
         return success
     }

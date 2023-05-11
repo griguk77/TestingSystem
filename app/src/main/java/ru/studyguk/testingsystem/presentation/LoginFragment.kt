@@ -48,6 +48,11 @@ class LoginFragment : Fragment() {
             )
             val success = vm.login(user)
             if (success) {
+                Snackbar.make(
+                    view,
+                    "Вход выполнен",
+                    Snackbar.LENGTH_SHORT
+                ).show()
                 findNavController().navigate(R.id.action_loginFragment_to_catalogFragment)
             } else {
                 Snackbar.make(
