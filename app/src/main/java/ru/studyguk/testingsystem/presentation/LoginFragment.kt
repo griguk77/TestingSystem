@@ -20,9 +20,7 @@ private const val ARG_PARAM2 = "param2"
 
 class LoginFragment : Fragment() {
 
-    lateinit var mainViewModelFactory: MainViewModelFactory
-
-    private var vm: MainViewModel = ViewModelProvider(this, mainViewModelFactory).get(MainViewModel::class.java)
+    private val vm: MainViewModel by activityViewModels{ MainViewModelFactory(requireActivity().application) }
     private lateinit var binding: FragmentLoginBinding
     private var param1: String? = null
     private var param2: String? = null
@@ -45,8 +43,8 @@ class LoginFragment : Fragment() {
         }
         binding.buttonLoginLogin.setOnClickListener {
             val user = User(
-                binding.editTextTextEmailAddressLogin.toString(),
-                binding.editTextTextPasswordLogin.toString()
+                binding.editTextTextEmailAddressLogin.text.toString(),
+                binding.editTextTextPasswordLogin.text.toString()
             )
             val success = vm.login(user)
             if (success) {

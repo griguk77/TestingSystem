@@ -1,5 +1,6 @@
 package ru.studyguk.testingsystem.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -29,6 +30,7 @@ class MainViewModel(
         val success = true
         if (success) {
             _userName.value = user.name.substringBefore('@')
+            Log.d("RRR", _userName.value.toString())
         }
         return success
     }
