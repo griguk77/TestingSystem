@@ -43,8 +43,8 @@ class RegistrFragment : Fragment() {
                 binding.editTextTextEmailAddressRegistr.text.toString(),
                 binding.editTextTextPasswordRegistr.text.toString()
             )
-            val success = vm.registr(user)
-            if (success) {
+            vm.registr(user)
+            if (vm.success.value == true) {
                 Snackbar.make(
                     view,
                     "Пользователь ${vm.userName.value.toString()} успешно зарегистрирован",

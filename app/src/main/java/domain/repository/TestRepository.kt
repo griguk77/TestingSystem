@@ -19,7 +19,7 @@ interface TestRepository {
 
     fun startTest(testName: String): LiveData<Question>
 
-    fun openCatalog(): LiveData<List<String>>
+    suspend fun openCatalog(): List<String>
 
     fun getCountQue(testName: String): LiveData<Int>
 }

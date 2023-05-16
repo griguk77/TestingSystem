@@ -8,6 +8,7 @@ import androidx.room.Query
 import data.models.Question
 import data.models.Result
 import data.models.Test
+import data.models.TextResult
 
 @Dao
 interface TestDao {
@@ -23,11 +24,20 @@ interface TestDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertResult(result: Result)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertQuestion(question: Question)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertTest(test: Test)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertTextResult(textResult: TextResult)
+
     @Query("SELECT * FROM result WHERE testName == :testName ORDER BY id DESC")
     fun getResults(testName: String): LiveData<List<Result>>
 
-    @Query("SELECT name FROM test")
-    fun getCatalog(): LiveData<List<String>>
+    @Query("SELECT name FROM test ORDER BY name")
+    suspend fun getCatalog(): List<String>
 
     @Query("SELECT queCount FROM test WHERE name == :testName LIMIT 1")
     fun getQueCount(testName: String): LiveData<Int>

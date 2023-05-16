@@ -9,7 +9,7 @@ import data.models.Test
 import data.models.Result
 import data.models.TextResult
 
-@Database(entities = [Test::class, Question::class, Result::class, TextResult::class], version = 1, exportSchema = false)
+@Database(entities = [Test::class, Question::class, Result::class, TextResult::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     companion object {
         private var db: AppDatabase? = null

@@ -2,11 +2,13 @@ package data.repository
 
 import android.app.Application
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import data.database.AppDatabase
 import data.database.TestDao
+import data.models.Test
 import domain.models.Question
 import domain.models.Result
 import domain.models.User
@@ -61,7 +63,42 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
         return db.testDao().getQueCount(testName)
     }
 
-    override fun openCatalog(): LiveData<List<String>> {
+    override suspend fun openCatalog(): List<String> {
+        if (db.testDao().getCatalog() == null) {
+            Log.d("RRR", "пусто")
+            db.testDao().insertTest(Test(
+                "Математика",
+                "Данный тест позволит оценить Ваши навыки в математике",
+                8
+            ))
+            db.testDao().insertTest(Test(
+                "Русский язык",
+                "Данный тест позволит оценить уровень Вашего владения русским языком",
+                8
+            ))
+            db.testDao().insertTest(Test(
+                "История",
+                "Данный тест позволит оценить Ваши знания истории",
+                8
+            ))
+            db.testDao().insertTest(Test(
+                "Химия",
+                "Данный тест позволит оценить Ваши знания о химии",
+                8
+            ))
+            db.testDao().insertTest(Test(
+                "Биология",
+                "Данный тест позволит оценить Ваш уровень знаний биологии",
+                8
+            ))
+            db.testDao().insertTest(Test(
+                "Политические координаты",
+                "Данный тест позволит оценить Вашу политическую предрасположенность",
+                8
+            ))
+        } else {
+            Log.d("RRR", "не пусто")
+        }
         return db.testDao().getCatalog()
     }
 

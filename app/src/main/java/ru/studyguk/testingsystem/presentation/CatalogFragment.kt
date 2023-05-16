@@ -23,7 +23,7 @@ private const val ARG_PARAM2 = "param2"
 
 class CatalogFragment : Fragment(), TestAdapter.OnItemClickListener {
     private val vm: MainViewModel by activityViewModels{ MainViewModelFactory(requireActivity().application) }
-    private var tests: ArrayList<String> = ArrayList()
+    private var tests: List<String> = listOf()
     private lateinit var binding: FragmentCatalogBinding
     private var param1: String? = null
     private var param2: String? = null
@@ -36,26 +36,28 @@ class CatalogFragment : Fragment(), TestAdapter.OnItemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        if (tests.size == 0) {
-            tests.add("<u>Математика</u>")
-            tests.add("<u>Русский язык</u>")
-            tests.add("<u>История</u>")
-            tests.add("<u>Литература</u>")
-            tests.add("<u>Биология</u>")
-            tests.add("<u>Политические координаты</u>")
-        }
-        val adapter = TestAdapter(tests, this)
         binding = FragmentCatalogBinding.inflate(layoutInflater)
-        binding.recyclerViewTests.layoutManager = LinearLayoutManager(this.context)
-        binding.recyclerViewTests.adapter = adapter
-
-        vm.userName.observe(viewLifecycleOwner) {
-            binding.textViewHelloUser.text = "Здравствуйте, $it!"
-        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        vm.userName.observe(viewLifecycleOwner) {
+            binding.textViewHelloUser.text = "Здравствуйте, $it!"
+        }
+        vm.showCatalog()
+        vm.catalog.observe(viewLifecycleOwner) {
+            if (it != null) {
+                Log.d("RRR", "!null = $it")
+                val listAdapter = TestAdapter(it, this)
+                binding.recyclerViewTests.layoutManager = LinearLayoutManager(requireContext())
+                binding.recyclerViewTests.adapter = listAdapter
+            } else {
+               Log.d("RRR", "null = $it")
+            }
+        }
+//        val adapter = TestAdapter(vm.catalog.value!!, this)
+//        binding.recyclerViewTests.layoutManager = LinearLayoutManager(this.context)
+//        binding.recyclerViewTests.adapter = adapter
         super.onViewCreated(view, savedInstanceState)
     }
 

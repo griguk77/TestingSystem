@@ -46,8 +46,8 @@ class LoginFragment : Fragment() {
                 binding.editTextTextEmailAddressLogin.text.toString(),
                 binding.editTextTextPasswordLogin.text.toString()
             )
-            val success = vm.login(user)
-            if (success) {
+            vm.login(user)
+            if (vm.success.value == true) {
                 Snackbar.make(
                     view,
                     "Вход выполнен",
