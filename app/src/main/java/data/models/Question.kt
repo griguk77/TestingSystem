@@ -24,8 +24,8 @@ data class Question(
     val ans2: String,
     val ans3: String,
     val ans4: String,
-    val point1: Int,
-    val point2: Int,
-    val point3: Int,
-    val point4: Int
+    val point1: Double,
+    val point2: Double,
+    val point3: Double,
+    val point4: Double
 )

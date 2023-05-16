@@ -9,7 +9,7 @@ interface TestRepository {
 
     fun continueTest(testName: String, queNum: Int): LiveData<Question>
 
-    fun finishTest(testName: String, point: Int, userName: String): LiveData<String>
+    fun finishTest(testName: String, point: Double, userName: String): LiveData<String>
 
     fun login(user: User): Boolean
 

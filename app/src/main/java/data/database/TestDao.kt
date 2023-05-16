@@ -19,19 +19,19 @@ interface TestDao {
     fun getQueInfo(testName: String, queNum: Int): LiveData<Question>
 
     @Query("SELECT text FROM text_result WHERE testName == :testName AND beginPoint <= :point AND endPoint > :point LIMIT 1")
-    fun getTextResult(testName: String, point: Int): LiveData<String>
+    fun getTextResult(testName: String, point: Double): LiveData<String>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertResult(result: Result)
+    suspend fun insertResult(result: Result)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertQuestion(question: Question)
+    suspend fun insertQuestion(question: Question)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTest(test: Test)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertTextResult(textResult: TextResult)
+    suspend fun insertTextResult(textResult: TextResult)
 
     @Query("SELECT * FROM result WHERE testName == :testName ORDER BY id DESC")
     fun getResults(testName: String): LiveData<List<Result>>
