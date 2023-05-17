@@ -20,7 +20,7 @@ import java.time.format.DateTimeFormatter
 class TestRepositoryImpl(private val application: Application) : TestRepository {
     private var db = AppDatabase.getInstance(application)
 
-    override fun chooseTest(testName: String): LiveData<String> {
+    override suspend fun chooseTest(testName: String): String {
         return db.testDao().getDeclTest(testName)
     }
 
@@ -959,7 +959,7 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                     4,
                     "Математика",
                     75.0,
-                    100.0,
+                    101.0,
                     "Ваши знания предмета великолепны, так держать!"
                 )
             )
@@ -998,7 +998,7 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                     8,
                     "Русский язык",
                     75.0,
-                    100.0,
+                    101.0,
                     "Ваши знания предмета великолепны, так держать!"
                 )
             )
@@ -1037,7 +1037,7 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                     12,
                     "История",
                     75.0,
-                    100.0,
+                    101.0,
                     "Ваши знания предмета великолепны, так держать!"
                 )
             )
@@ -1076,7 +1076,7 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                     16,
                     "Химия",
                     75.0,
-                    100.0,
+                    101.0,
                     "Ваши знания предмета великолепны, так держать!"
                 )
             )
@@ -1115,7 +1115,7 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                     20,
                     "Биология",
                     75.0,
-                    100.0,
+                    101.0,
                     "Ваши знания предмета великолепны, так держать!"
                 )
             )
@@ -1156,7 +1156,7 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                     24,
                     "Политические координаты",
                     50.0,
-                    100.0,
+                    101.0,
                     "Вам близки такие течения, как классический либерализм, неолиберализм, " +
                             "либертарианство, а приоритетом для Вас являются свобода и равенство" +
                             " человека"

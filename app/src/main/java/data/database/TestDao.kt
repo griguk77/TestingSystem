@@ -13,7 +13,7 @@ import data.models.TextResult
 @Dao
 interface TestDao {
     @Query("SELECT declTest FROM test WHERE name == :testName LIMIT 1")
-    fun getDeclTest(testName: String): LiveData<String>
+    suspend fun getDeclTest(testName: String): String
 
     @Query("SELECT * FROM question WHERE testName == :testName AND queNum == :queNum LIMIT 1")
     fun getQueInfo(testName: String, queNum: Int): LiveData<Question>

@@ -5,7 +5,7 @@ import domain.models.*
 
 interface TestRepository {
 
-    fun chooseTest(testName: String): LiveData<String>
+    suspend fun chooseTest(testName: String): String
 
     fun continueTest(testName: String, queNum: Int): LiveData<Question>
 

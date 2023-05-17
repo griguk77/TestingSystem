@@ -30,6 +30,12 @@ class MainViewModel(
     private val _catalog = MutableLiveData<List<String>>()
     var catalog: LiveData<List<String>> = _catalog
 
+    private val _testName = MutableLiveData<String>()
+    var testName: LiveData<String> = _testName
+
+    private val _declaration = MutableLiveData<String>()
+    var declaration: LiveData<String> = _declaration
+
     fun login(user: User) {
         //_success = loginUseCase.login(user)
         _success.value = true
@@ -49,7 +55,17 @@ class MainViewModel(
     fun showCatalog() {
         viewModelScope.launch {
             _catalog.value = openCatalogUseCase.openCatalog()
-            Log.d("RRR", "value = ${catalog.value}")
+            //Log.d("RRR", "value = ${catalog.value}")
+        }
+    }
+
+    fun saveTestName(name: String) {
+        _testName.value = name
+    }
+
+    fun getDeclTest(name: String) {
+        viewModelScope.launch {
+            _declaration.value = chooseTestUseCase.chooseTest(name)
         }
     }
 }

@@ -14,6 +14,7 @@
         android:paddingStart="30dp"
         android:paddingEnd="30dp"
         android:text="@string/subjectName"
+        android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="34sp"
         android:textStyle="bold"

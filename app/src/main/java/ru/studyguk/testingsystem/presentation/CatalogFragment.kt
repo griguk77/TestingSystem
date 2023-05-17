@@ -47,12 +47,12 @@ class CatalogFragment : Fragment(), TestAdapter.OnItemClickListener {
         vm.showCatalog()
         vm.catalog.observe(viewLifecycleOwner) {
             if (it != null) {
-                Log.d("RRR", "!null = $it")
+                //Log.d("RRR", "!null = $it")
                 val listAdapter = TestAdapter(it, this)
                 binding.recyclerViewTests.layoutManager = LinearLayoutManager(requireContext())
                 binding.recyclerViewTests.adapter = listAdapter
             } else {
-               Log.d("RRR", "null = $it")
+               //Log.d("RRR", "null = $it")
             }
         }
 //        val adapter = TestAdapter(vm.catalog.value!!, this)
@@ -62,6 +62,7 @@ class CatalogFragment : Fragment(), TestAdapter.OnItemClickListener {
     }
 
     override fun onItemClickListener(testName: String) {
+        vm.saveTestName(testName)
         findNavController().navigate(R.id.action_catalogFragment_to_testStartFragment)
     }
 }
