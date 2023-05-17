@@ -16,7 +16,7 @@ interface TestDao {
     suspend fun getDeclTest(testName: String): String
 
     @Query("SELECT * FROM question WHERE testName == :testName AND queNum == :queNum LIMIT 1")
-    fun getQueInfo(testName: String, queNum: Int): LiveData<Question>
+    suspend fun getQueInfo(testName: String, queNum: Int): Question
 
     @Query("SELECT text FROM text_result WHERE testName == :testName AND beginPoint <= :point AND endPoint > :point LIMIT 1")
     fun getTextResult(testName: String, point: Double): LiveData<String>
@@ -40,7 +40,7 @@ interface TestDao {
     suspend fun getCatalog(): List<String>
 
     @Query("SELECT queCount FROM test WHERE name == :testName LIMIT 1")
-    fun getQueCount(testName: String): LiveData<Int>
+    suspend fun getQueCount(testName: String): Int
 
     @Query("SELECT id FROM result WHERE testName == :testName ORDER BY id DESC LIMIT 1")
     fun getResultId(testName: String): LiveData<Int>

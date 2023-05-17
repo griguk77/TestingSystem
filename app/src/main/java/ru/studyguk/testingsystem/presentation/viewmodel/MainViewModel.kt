@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import domain.models.Question
 import domain.models.User
 import domain.usecases.*
 import kotlinx.coroutines.launch
@@ -17,8 +18,7 @@ class MainViewModel(
     private val loginUseCase: LoginUseCase,
     private val openCatalogUseCase: OpenCatalogUseCase,
     private val registrUseCase: RegistrUseCase,
-    private val showAllResultsUseCase: ShowAllResultsUseCase,
-    private val startTestUseCase: StartTestUseCase
+    private val showAllResultsUseCase: ShowAllResultsUseCase
 ) : ViewModel() {
 
     private val _userName = MutableLiveData<String>()
@@ -35,6 +35,15 @@ class MainViewModel(
 
     private val _declaration = MutableLiveData<String>()
     var declaration: LiveData<String> = _declaration
+
+    private val _question = MutableLiveData<Question>()
+    var question: LiveData<Question> = _question
+
+    private val _queCount = MutableLiveData<Int>()
+    var queCount: LiveData<Int> = _queCount
+
+    private val _pointsResult = MutableLiveData<Double>()
+    var pointsResult: LiveData<Double> = _pointsResult
 
     fun login(user: User) {
         //_success = loginUseCase.login(user)
@@ -67,5 +76,25 @@ class MainViewModel(
         viewModelScope.launch {
             _declaration.value = chooseTestUseCase.chooseTest(name)
         }
+    }
+
+    fun setQueNum(num: Int) {
+        _question.value?.queNum = num
+    }
+
+    fun getQueCount(name: String) {
+        viewModelScope.launch {
+            _queCount.value = getCountQueUseCase.getCountQue(name)
+        }
+    }
+
+    fun getQuestion(name: String, num: Int) {
+        viewModelScope.launch {
+            _question.value = continueTestUseCase.continueTest(name, num)
+        }
+    }
+
+    fun setPoints(points: Double) {
+        _pointsResult.value = points
     }
 }

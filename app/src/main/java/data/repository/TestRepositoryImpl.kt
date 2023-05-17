@@ -1,13 +1,10 @@
 package data.repository
 
 import android.app.Application
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import data.database.AppDatabase
-import data.database.TestDao
 import data.models.Test
 import data.models.TextResult
 import domain.models.Question
@@ -24,7 +21,7 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
         return db.testDao().getDeclTest(testName)
     }
 
-    override fun continueTest(testName: String, queNum: Int): LiveData<Question> {
+    override suspend fun continueTest(testName: String, queNum: Int): Question {
         val questionData = db.testDao().getQueInfo(testName, queNum)
         return mapQuestionToDomain(questionData)
     }
@@ -55,24 +52,27 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
         return mapResultToDomain(resultData)
     }
 
-    override fun startTest(testName: String): LiveData<Question> {
-        val questionData = db.testDao().getQueInfo(testName, 1)
-        return mapQuestionToDomain(questionData)
-    }
-
-    override fun getCountQue(testName: String): LiveData<Int> {
+    override suspend fun getCountQue(testName: String): Int {
         return db.testDao().getQueCount(testName)
     }
 
-    private fun mapQuestionToDomain(questionData: LiveData<data.models.Question>): LiveData<Question> {
-        var questionDomain = MutableLiveData<domain.models.Question>()
-        questionDomain = Transformations.map(questionData) {
-            questionDomain.value?.queNum = it.queNum
-            questionDomain.value?.queText = it.queText
-            questionDomain.value?.variants = listOf(it.ans1, it.ans2, it.ans3, it.ans4)
-            questionDomain.value?.points = listOf(it.point1, it.point2, it.point3, it.point4)
-        } as MutableLiveData<Question>
-        return questionDomain
+    private fun mapQuestionToDomain(questionData: data.models.Question): Question {
+        return Question(
+            questionData.queNum,
+            questionData.queText,
+            listOf(
+                questionData.ans1,
+                questionData.ans2,
+                questionData.ans3,
+                questionData.ans4
+            ),
+            listOf(
+                questionData.point1,
+                questionData.point2,
+                questionData.point3,
+                questionData.point4
+            )
+        )
     }
 
     private fun mapResultToDomain(resultData: LiveData<List<data.models.Result>>): LiveData<List<domain.models.Result>> {
@@ -91,7 +91,7 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
 
     override suspend fun openCatalog(): List<String> {
         if (db.testDao().getCatalog().isEmpty()) {
-            Log.d("RRR", "пусто")
+            //Log.d("RRR", "пусто")
             db.testDao().insertTest(
                 Test(
                     "Математика",
@@ -1163,7 +1163,7 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                 )
             )
         } else {
-            Log.d("RRR", "не пусто")
+            //Log.d("RRR", "не пусто")
         }
         return db.testDao().getCatalog()
     }

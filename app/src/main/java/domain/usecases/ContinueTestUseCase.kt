@@ -5,7 +5,7 @@ import domain.models.Question
 import domain.repository.TestRepository
 
 class ContinueTestUseCase (private val testRepository: TestRepository) {
-    fun continueTest(testName: String, queNum: Int): LiveData<Question> {
+    suspend fun continueTest(testName: String, queNum: Int): Question {
         return testRepository.continueTest(testName, queNum)
     }
 }

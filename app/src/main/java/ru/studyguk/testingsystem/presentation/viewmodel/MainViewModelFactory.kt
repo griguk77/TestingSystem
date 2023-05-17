@@ -44,10 +44,6 @@ class MainViewModelFactory(private val application: Application): ViewModelProvi
         ShowAllResultsUseCase(testRepository)
     }
 
-    private val startTestUseCase by lazy(LazyThreadSafetyMode.NONE) {
-        StartTestUseCase(testRepository)
-    }
-
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return MainViewModel(
             chooseTestUseCase,
@@ -57,8 +53,7 @@ class MainViewModelFactory(private val application: Application): ViewModelProvi
             loginUseCase,
             openCatalogUseCase,
             registrUseCase,
-            showAllResultsUseCase,
-            startTestUseCase
+            showAllResultsUseCase
         ) as T
     }
 

@@ -38,6 +38,7 @@ class TestStartFragment : Fragment() {
         vm.testName.observe(viewLifecycleOwner) {
             binding.textViewSubjectNameStart.text = it
             vm.getDeclTest(it)
+            vm.getQueCount(it)
         }
         vm.declaration.observe(viewLifecycleOwner) {
             binding.textViewSubjectDeclaration.text = it
@@ -46,6 +47,9 @@ class TestStartFragment : Fragment() {
             findNavController().navigate(R.id.action_testStartFragment_to_allResultsFragment)
         }
         binding.buttonStartTest.setOnClickListener {
+            vm.setQueNum(1)
+            vm.setPoints(0.0)
+            vm.testName.value?.let { it1 -> vm.getQuestion(it1, 1) }
             findNavController().navigate(R.id.action_testStartFragment_to_questionFragment)
         }
         super.onViewCreated(view, savedInstanceState)
