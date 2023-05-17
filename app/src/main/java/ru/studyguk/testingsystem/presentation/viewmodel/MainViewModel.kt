@@ -48,6 +48,9 @@ class MainViewModel(
     private val _textResult = MutableLiveData<String>()
     var textResult: LiveData<String> = _textResult
 
+    private val _results = MutableLiveData<List<domain.models.Result>>()
+    var results: LiveData<List<domain.models.Result>> = _results
+
     fun login(user: User) {
         //_success = loginUseCase.login(user)
         _success.value = true
@@ -67,7 +70,6 @@ class MainViewModel(
     fun showCatalog() {
         viewModelScope.launch {
             _catalog.value = openCatalogUseCase.openCatalog()
-            //Log.d("RRR", "value = ${catalog.value}")
         }
     }
 
@@ -104,6 +106,12 @@ class MainViewModel(
     fun getTextResult(nameTest: String, points: Int, nameUser: String) {
         viewModelScope.launch {
             _textResult.value = finishTestUseCase.finishTest(nameTest, points, nameUser)
+        }
+    }
+
+    fun getAllResults(nameTest: String) {
+        viewModelScope.launch {
+            _results.value = showAllResultsUseCase.showAllResults(nameTest)
         }
     }
 }

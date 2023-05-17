@@ -27,11 +27,10 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
     }
 
     override suspend fun finishTest(testName: String, point: Int, userName: String): String {
-        val id = db.testDao().getResultId(testName) + 1
         val date = LocalDateTime.now()
             .format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
             .toString()
-        //db.testDao().insertResult(data.models.Result(id, testName, userName, point, date))
+        db.testDao().insertResult(data.models.Result(0, testName, userName, point, date))
         return db.testDao().getTextResult(testName, point)
     }
 
@@ -43,13 +42,16 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
         TODO("Not yet implemented")
     }
 
-    override fun showAllResults(testName: String): LiveData<List<Result>> {
+    override suspend fun showAllResults(testName: String): List<Result> {
         val resultData = db.testDao().getResults(testName)
-        return mapResultToDomain(resultData)
+        val list = ArrayList<domain.models.Result>()
+        for (i in resultData.indices) {
+            list.add(mapResultToDomain(resultData[i]))
+        }
+        return list
     }
 
     override suspend fun getCountQue(testName: String): Int {
-        db.testDao().insertResult(data.models.Result(0, testName, "userName", 111, "date"))
         return db.testDao().getQueCount(testName)
     }
 
@@ -72,18 +74,13 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
         )
     }
 
-    private fun mapResultToDomain(resultData: LiveData<List<data.models.Result>>): LiveData<List<domain.models.Result>> {
-        val resultDomain = MutableLiveData<MutableList<domain.models.Result>>()
-        if (resultData.value?.size != null) {
-            for (i in 0 until resultData.value?.size!!) {
-                val resDomain = resultData.value?.get(i)
-                    ?.let { domain.models.Result(it.testName, it.user, it.points, it.date) }
-                if (resDomain != null) {
-                    resultDomain.value?.add(resDomain)
-                }
-            }
-        }
-        return resultDomain as MutableLiveData<List<Result>>
+    private fun mapResultToDomain(resultData: data.models.Result): domain.models.Result {
+        return domain.models.Result(
+            resultData.testName,
+            resultData.user,
+            resultData.points,
+            resultData.date
+        )
     }
 
     override suspend fun openCatalog(): List<String> {

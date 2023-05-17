@@ -5,7 +5,7 @@ import domain.models.Result
 import domain.repository.TestRepository
 
 class ShowAllResultsUseCase (private val testRepository: TestRepository) {
-    fun showAllResults(testName: String): LiveData<List<Result>> {
+    suspend fun showAllResults(testName: String): List<Result> {
         return testRepository.showAllResults(testName)
     }
 }

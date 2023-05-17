@@ -34,7 +34,7 @@ interface TestDao {
     suspend fun insertTextResult(textResult: TextResult)
 
     @Query("SELECT * FROM result WHERE testName == :testName AND points < 111 ORDER BY id DESC")
-    fun getResults(testName: String): LiveData<List<Result>>
+    suspend fun getResults(testName: String): List<Result>
 
     @Query("SELECT name FROM test ORDER BY name")
     suspend fun getCatalog(): List<String>

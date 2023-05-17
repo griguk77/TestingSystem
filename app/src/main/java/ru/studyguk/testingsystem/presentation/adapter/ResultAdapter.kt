@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import domain.models.Result
 import ru.studyguk.testingsystem.R
 
-class ResultAdapter(val list: ArrayList<Result>) : RecyclerView.Adapter<ResultAdapter.MyResult>() {
+class ResultAdapter(val list: List<Result>) : RecyclerView.Adapter<ResultAdapter.MyResult>() {
     class MyResult(item: View) : RecyclerView.ViewHolder(item) {
         val tvUser: TextView = item.findViewById(R.id.textViewUserResult)
         val tvResult: TextView = item.findViewById(R.id.textViewResResult)

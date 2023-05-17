@@ -22,8 +22,7 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 class CatalogFragment : Fragment(), TestAdapter.OnItemClickListener {
-    private val vm: MainViewModel by activityViewModels{ MainViewModelFactory(requireActivity().application) }
-    private var tests: List<String> = listOf()
+    private val vm: MainViewModel by activityViewModels { MainViewModelFactory(requireActivity().application) }
     private lateinit var binding: FragmentCatalogBinding
     private var param1: String? = null
     private var param2: String? = null
@@ -42,22 +41,15 @@ class CatalogFragment : Fragment(), TestAdapter.OnItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         vm.userName.observe(viewLifecycleOwner) {
-            binding.textViewHelloUser.text = "Здравствуйте, $it!"
+            val greeting = "Здравствуйте, $it!"
+            binding.textViewHelloUser.text = greeting
         }
         vm.showCatalog()
         vm.catalog.observe(viewLifecycleOwner) {
-            if (it != null) {
-                //Log.d("RRR", "!null = $it")
-                val listAdapter = TestAdapter(it, this)
-                binding.recyclerViewTests.layoutManager = LinearLayoutManager(requireContext())
-                binding.recyclerViewTests.adapter = listAdapter
-            } else {
-               //Log.d("RRR", "null = $it")
-            }
+            val listAdapter = TestAdapter(it, this)
+            binding.recyclerViewTests.layoutManager = LinearLayoutManager(requireContext())
+            binding.recyclerViewTests.adapter = listAdapter
         }
-//        val adapter = TestAdapter(vm.catalog.value!!, this)
-//        binding.recyclerViewTests.layoutManager = LinearLayoutManager(this.context)
-//        binding.recyclerViewTests.adapter = adapter
         super.onViewCreated(view, savedInstanceState)
     }
 

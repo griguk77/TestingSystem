@@ -15,7 +15,7 @@ interface TestRepository {
 
     fun registr(user: User): Boolean
 
-    fun showAllResults(testName: String): LiveData<List<Result>>
+    suspend fun showAllResults(testName: String): List<Result>
 
     suspend fun openCatalog(): List<String>
 
