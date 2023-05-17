@@ -12,6 +12,7 @@ import ru.studyguk.testingsystem.R
 import ru.studyguk.testingsystem.databinding.FragmentQuestionBinding
 import ru.studyguk.testingsystem.presentation.viewmodel.MainViewModel
 import ru.studyguk.testingsystem.presentation.viewmodel.MainViewModelFactory
+import kotlin.math.floor
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -64,11 +65,12 @@ class QuestionFragment : Fragment() {
                 pointResult += vm.question.value?.points?.get(3) ?: 0.0
             }
             vm.setPoints(pointResult + (vm.pointsResult.value ?: 0.0))
-            Log.d("RRR", "промежуточное = $pointResult")
-            Log.d("RRR", "итоговое = ${vm.pointsResult.value.toString()}")
+            //Log.d("RRR", "промежуточное = $pointResult")
+            //Log.d("RRR", "итоговое = ${vm.pointsResult.value.toString()}")
             if (vm.queCount.value == vm.question.value?.queNum) {
-                //Log.d("RRR", vm.pointsResult.value.toString())
-                //дописать логику
+//                vm.pointsResult.value?.times(10.0)?.let { it1 -> floor(it1.div(10.0)) }
+//                    ?.let { it2 -> vm.setPoints(it2) }
+                //Log.d("RRR", "конечное = ${vm.pointsResult.value.toString()}")
                 findNavController().navigate(R.id.action_questionFragment_to_resultFragment)
             } else {
                 vm.testName.value?.let { it1 -> vm.getQuestion(it1, (vm.question.value?.queNum?.plus(1) ?: 1)) }

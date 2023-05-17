@@ -11,7 +11,7 @@ import data.models.TextResult
 
 @Database(
     entities = [Test::class, Question::class, Result::class, TextResult::class],
-    version = 4,
+    version = 5,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {

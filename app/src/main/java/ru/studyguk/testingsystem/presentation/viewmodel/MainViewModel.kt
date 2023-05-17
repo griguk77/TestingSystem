@@ -45,6 +45,9 @@ class MainViewModel(
     private val _pointsResult = MutableLiveData<Double>()
     var pointsResult: LiveData<Double> = _pointsResult
 
+    private val _textResult = MutableLiveData<String>()
+    var textResult: LiveData<String> = _textResult
+
     fun login(user: User) {
         //_success = loginUseCase.login(user)
         _success.value = true
@@ -96,5 +99,11 @@ class MainViewModel(
 
     fun setPoints(points: Double) {
         _pointsResult.value = points
+    }
+
+    fun getTextResult(nameTest: String, points: Int, nameUser: String) {
+        viewModelScope.launch {
+            _textResult.value = finishTestUseCase.finishTest(nameTest, points, nameUser)
+        }
     }
 }

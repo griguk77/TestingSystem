@@ -19,7 +19,7 @@ interface TestDao {
     suspend fun getQueInfo(testName: String, queNum: Int): Question
 
     @Query("SELECT text FROM text_result WHERE testName == :testName AND beginPoint <= :point AND endPoint > :point LIMIT 1")
-    fun getTextResult(testName: String, point: Double): LiveData<String>
+    suspend fun getTextResult(testName: String, point: Int): String
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertResult(result: Result)
@@ -33,7 +33,7 @@ interface TestDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTextResult(textResult: TextResult)
 
-    @Query("SELECT * FROM result WHERE testName == :testName ORDER BY id DESC")
+    @Query("SELECT * FROM result WHERE testName == :testName AND points < 111 ORDER BY id DESC")
     fun getResults(testName: String): LiveData<List<Result>>
 
     @Query("SELECT name FROM test ORDER BY name")
@@ -43,5 +43,5 @@ interface TestDao {
     suspend fun getQueCount(testName: String): Int
 
     @Query("SELECT id FROM result WHERE testName == :testName ORDER BY id DESC LIMIT 1")
-    fun getResultId(testName: String): LiveData<Int>
+    suspend fun getResultId(testName: String): Int
 }

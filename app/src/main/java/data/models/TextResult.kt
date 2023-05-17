@@ -18,7 +18,7 @@ data class TextResult(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val testName: String,
-    val beginPoint: Double,
-    val endPoint: Double,
+    val beginPoint: Int,
+    val endPoint: Int,
     val text: String
 )

@@ -9,7 +9,7 @@ interface TestRepository {
 
     suspend fun continueTest(testName: String, queNum: Int): Question
 
-    fun finishTest(testName: String, point: Double, userName: String): LiveData<String>
+    suspend fun finishTest(testName: String, point: Int, userName: String): String
 
     fun login(user: User): Boolean
 

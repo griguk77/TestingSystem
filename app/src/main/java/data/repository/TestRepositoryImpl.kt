@@ -26,16 +26,12 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
         return mapQuestionToDomain(questionData)
     }
 
-    override fun finishTest(testName: String, point: Double, userName: String): LiveData<String> {
-        var idResult = 1
-        val id = db.testDao().getResultId(testName).value
-        if (id != null) {
-            idResult = id
-        }
+    override suspend fun finishTest(testName: String, point: Int, userName: String): String {
+        val id = db.testDao().getResultId(testName) + 1
         val date = LocalDateTime.now()
-            .format(DateTimeFormatter.ofPattern("dd.mm.yyyy"))
+            .format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
             .toString()
-        //db.testDao().insertResult(data.models.Result(idResult, testName, userName, point, date))
+        //db.testDao().insertResult(data.models.Result(id, testName, userName, point, date))
         return db.testDao().getTextResult(testName, point)
     }
 
@@ -53,6 +49,7 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
     }
 
     override suspend fun getCountQue(testName: String): Int {
+        db.testDao().insertResult(data.models.Result(0, testName, "userName", 111, "date"))
         return db.testDao().getQueCount(testName)
     }
 
@@ -928,8 +925,8 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                 TextResult(
                     1,
                     "Математика",
-                    -100.0,
-                    25.0,
+                    -100,
+                    25,
                     "Ваши знания крайне слабы, Вам нужно лучше изучить предмет и пройти тест" +
                             " повторно"
                 )
@@ -938,8 +935,8 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                 TextResult(
                     2,
                     "Математика",
-                    25.0,
-                    50.0,
+                    25,
+                    50,
                     "Вам знаком некоторый материал данной дисциплины, но чтобы считать себя" +
                             " знатоком придётся узнать ещё крайне много информации"
                 )
@@ -948,8 +945,8 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                 TextResult(
                     3,
                     "Математика",
-                    50.0,
-                    75.0,
+                    50,
+                    75,
                     "Вы достаточно хорошо владеете материалом и знаете ответы на многие " +
                             "вопросы дисциплины"
                 )
@@ -958,8 +955,8 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                 TextResult(
                     4,
                     "Математика",
-                    75.0,
-                    101.0,
+                    75,
+                    101,
                     "Ваши знания предмета великолепны, так держать!"
                 )
             )
@@ -967,8 +964,8 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                 TextResult(
                     5,
                     "Русский язык",
-                    -100.0,
-                    25.0,
+                    -100,
+                    25,
                     "Ваши знания крайне слабы, Вам нужно лучше изучить предмет и пройти тест" +
                             " повторно"
                 )
@@ -977,8 +974,8 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                 TextResult(
                     6,
                     "Русский язык",
-                    25.0,
-                    50.0,
+                    25,
+                    50,
                     "Вам знаком некоторый материал данной дисциплины, но чтобы считать себя" +
                             " знатоком придётся узнать ещё крайне много информации"
                 )
@@ -987,8 +984,8 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                 TextResult(
                     7,
                     "Русский язык",
-                    50.0,
-                    75.0,
+                    50,
+                    75,
                     "Вы достаточно хорошо владеете материалом и знаете ответы на многие " +
                             "вопросы дисциплины"
                 )
@@ -997,8 +994,8 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                 TextResult(
                     8,
                     "Русский язык",
-                    75.0,
-                    101.0,
+                    75,
+                    101,
                     "Ваши знания предмета великолепны, так держать!"
                 )
             )
@@ -1006,8 +1003,8 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                 TextResult(
                     9,
                     "История",
-                    -100.0,
-                    25.0,
+                    -100,
+                    25,
                     "Ваши знания крайне слабы, Вам нужно лучше изучить предмет и пройти тест" +
                             " повторно"
                 )
@@ -1016,8 +1013,8 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                 TextResult(
                     10,
                     "История",
-                    25.0,
-                    50.0,
+                    25,
+                    50,
                     "Вам знаком некоторый материал данной дисциплины, но чтобы считать себя" +
                             " знатоком придётся узнать ещё крайне много информации"
                 )
@@ -1026,8 +1023,8 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                 TextResult(
                     11,
                     "История",
-                    50.0,
-                    75.0,
+                    50,
+                    75,
                     "Вы достаточно хорошо владеете материалом и знаете ответы на многие " +
                             "вопросы дисциплины"
                 )
@@ -1036,8 +1033,8 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                 TextResult(
                     12,
                     "История",
-                    75.0,
-                    101.0,
+                    75,
+                    101,
                     "Ваши знания предмета великолепны, так держать!"
                 )
             )
@@ -1045,8 +1042,8 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                 TextResult(
                     13,
                     "Химия",
-                    -100.0,
-                    25.0,
+                    -100,
+                    25,
                     "Ваши знания крайне слабы, Вам нужно лучше изучить предмет и пройти тест" +
                             " повторно"
                 )
@@ -1055,8 +1052,8 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                 TextResult(
                     14,
                     "Химия",
-                    25.0,
-                    50.0,
+                    25,
+                    50,
                     "Вам знаком некоторый материал данной дисциплины, но чтобы считать себя" +
                             " знатоком придётся узнать ещё крайне много информации"
                 )
@@ -1065,8 +1062,8 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                 TextResult(
                     15,
                     "Химия",
-                    50.0,
-                    75.0,
+                    50,
+                    75,
                     "Вы достаточно хорошо владеете материалом и знаете ответы на многие " +
                             "вопросы дисциплины"
                 )
@@ -1075,8 +1072,8 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                 TextResult(
                     16,
                     "Химия",
-                    75.0,
-                    101.0,
+                    75,
+                    101,
                     "Ваши знания предмета великолепны, так держать!"
                 )
             )
@@ -1084,8 +1081,8 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                 TextResult(
                     17,
                     "Биология",
-                    -100.0,
-                    25.0,
+                    -100,
+                    25,
                     "Ваши знания крайне слабы, Вам нужно лучше изучить предмет и пройти тест" +
                             " повторно"
                 )
@@ -1094,8 +1091,8 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                 TextResult(
                     18,
                     "Биология",
-                    25.0,
-                    50.0,
+                    25,
+                    50,
                     "Вам знаком некоторый материал данной дисциплины, но чтобы считать себя" +
                             " знатоком придётся узнать ещё крайне много информации"
                 )
@@ -1104,8 +1101,8 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                 TextResult(
                     19,
                     "Биология",
-                    50.0,
-                    75.0,
+                    50,
+                    75,
                     "Вы достаточно хорошо владеете материалом и знаете ответы на многие " +
                             "вопросы дисциплины"
                 )
@@ -1114,8 +1111,8 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                 TextResult(
                     20,
                     "Биология",
-                    75.0,
-                    101.0,
+                    75,
+                    101,
                     "Ваши знания предмета великолепны, так держать!"
                 )
             )
@@ -1123,8 +1120,8 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                 TextResult(
                     21,
                     "Политические координаты",
-                    -100.0,
-                    -50.0,
+                    -100,
+                    -50,
                     "Вам близки такие течения, как марксизм, сталинизм, чучхе, авторитарный" +
                             " социализм, а приоритетом для Вас являются порядок и сила государства"
                 )
@@ -1133,8 +1130,8 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                 TextResult(
                     22,
                     "Политические координаты",
-                    -50.0,
-                    0.0,
+                    -50,
+                    0,
                     "Вам близки такие течения, как консерватизм, традиционализм, " +
                             "национализм, монархизм, Вы ближе к центризму, а приоритетом для Вас" +
                             " являются безопасность и суверенитет государства"
@@ -1144,8 +1141,8 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                 TextResult(
                     23,
                     "Политические координаты",
-                    0.0,
-                    50.0,
+                    0,
+                    50,
                     "Вам близки такие течения, как умеренный либерализм, также Вам близок " +
                             "капитализм, Вы ближе к центризму, а приоритетом для Вас являются " +
                             "право частной собственности и материальное благосостояние"
@@ -1155,8 +1152,8 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                 TextResult(
                     24,
                     "Политические координаты",
-                    50.0,
-                    101.0,
+                    50,
+                    101,
                     "Вам близки такие течения, как классический либерализм, неолиберализм, " +
                             "либертарианство, а приоритетом для Вас являются свобода и равенство" +
                             " человека"

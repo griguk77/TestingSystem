@@ -19,6 +19,6 @@ data class Result(
     val id: Int,
     val testName: String,
     val user: String,
-    val points: Double,
+    val points: Int,
     val date: String
 )
