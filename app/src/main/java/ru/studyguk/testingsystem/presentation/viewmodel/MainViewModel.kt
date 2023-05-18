@@ -8,6 +8,9 @@ import androidx.lifecycle.viewModelScope
 import domain.models.Question
 import domain.models.User
 import domain.usecases.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class MainViewModel(
@@ -24,8 +27,9 @@ class MainViewModel(
     private val _userName = MutableLiveData<String>()
     val userName: LiveData<String> = _userName
 
-    private val _success = MutableLiveData<Boolean>()
-    val success: LiveData<Boolean> = _success
+    private val _success = MutableStateFlow(false)
+    // The UI collects from this StateFlow to get its state updates
+    val success: StateFlow<Boolean> = _success
 
     private val _catalog = MutableLiveData<List<String>>()
     var catalog: LiveData<List<String>> = _catalog
@@ -52,16 +56,19 @@ class MainViewModel(
     var results: LiveData<List<domain.models.Result>> = _results
 
     fun login(user: User) {
-        //_success = loginUseCase.login(user)
-        _success.value = true
-        if (_success.value == true) {
-            _userName.value = user.name.substringBefore('@')
+        viewModelScope.launch {
+            loginUseCase.login(user).collect{
+                Log.d("RR", "$it")
+                _success.value = it
+                if (_success.value == true) {
+                    _userName.value = user.name.substringBefore('@')
+                }
+            }
         }
     }
 
     fun registr(user: User) {
-        //_success = registrUseCase.registr(user)
-        _success.value = true
+        _success.value = registrUseCase.registr(user)
         if (_success.value == true) {
             _userName.value = user.name.substringBefore('@')
         }

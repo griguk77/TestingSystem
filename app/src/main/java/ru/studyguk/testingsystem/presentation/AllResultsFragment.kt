@@ -17,7 +17,7 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 class AllResultsFragment : Fragment() {
-    private val vm: MainViewModel by activityViewModels { MainViewModelFactory(requireActivity().application) }
+    private val vm: MainViewModel by activityViewModels { MainViewModelFactory(requireActivity().application, requireActivity()) }
     private lateinit var binding: FragmentAllResultsBinding
     private var param1: String? = null
     private var param2: String? = null

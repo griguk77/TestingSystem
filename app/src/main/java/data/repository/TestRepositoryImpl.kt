@@ -2,8 +2,11 @@ package data.repository
 
 import android.app.Application
 import android.util.Log
+import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.auth.FirebaseAuth
 import data.database.AppDatabase
 import data.models.Test
 import data.models.TextResult
@@ -11,10 +14,14 @@ import domain.models.Question
 import domain.models.Result
 import domain.models.User
 import domain.repository.TestRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import java.lang.Exception
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class TestRepositoryImpl(private val application: Application) : TestRepository {
+class TestRepositoryImpl(private val application: Application, private val activity: FragmentActivity) : TestRepository {
+    private var auth = FirebaseAuth.getInstance()
     private var db = AppDatabase.getInstance(application)
 
     override suspend fun chooseTest(testName: String): String {
@@ -34,12 +41,34 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
         return db.testDao().getTextResult(testName, point)
     }
 
-    override fun login(user: User): Boolean {
-        TODO("Not yet implemented")
+    override fun login(user: User): StateFlow<Boolean> {
+        val loginState = MutableStateFlow(false)
+        auth.signInWithEmailAndPassword(user.name, user.password)
+            .addOnCompleteListener(activity) { task ->
+                Log.d("RRR", "${task.isSuccessful}")
+                loginState.value = task.isSuccessful
+                if (task.isSuccessful) {
+                    Log.d("RRR", "success = ")
+                } else {
+                    Log.d("RRR", "не успех")
+                }
+            }
+        return loginState
     }
 
     override fun registr(user: User): Boolean {
-        TODO("Not yet implemented")
+        var success = false
+        auth.createUserWithEmailAndPassword(user.name, user.password)
+            .addOnCompleteListener(activity) { task ->
+                if (task.isSuccessful) {
+                    Log.d("RRR", "успех")
+                    success = true
+                } else {
+                    Log.d("RRR", "не успех")
+                }
+            }
+        Log.d("RRR", success.toString())
+        return success
     }
 
     override suspend fun showAllResults(testName: String): List<Result> {

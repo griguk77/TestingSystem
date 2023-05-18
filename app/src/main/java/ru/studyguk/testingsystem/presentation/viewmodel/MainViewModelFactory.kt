@@ -1,15 +1,17 @@
 package ru.studyguk.testingsystem.presentation.viewmodel
 
+import android.app.Activity
 import android.app.Application
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import data.repository.TestRepositoryImpl
 import domain.usecases.*
 
-class MainViewModelFactory(private val application: Application): ViewModelProvider.Factory {
+class MainViewModelFactory(private val application: Application, private val activity: FragmentActivity): ViewModelProvider.Factory {
 
     private val testRepository by lazy(LazyThreadSafetyMode.NONE) {
-        TestRepositoryImpl(application)
+        TestRepositoryImpl(application, activity)
     }
 
     private val chooseTestUseCase by lazy(LazyThreadSafetyMode.NONE) {
