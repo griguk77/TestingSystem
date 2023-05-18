@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import domain.repository.TestRepository
 
 class ChooseTestUseCase (private val testRepository: TestRepository) {
-    fun chooseTest(testName: String): LiveData<String> {
+    suspend fun chooseTest(testName: String): String {
         return testRepository.chooseTest(testName)
     }
 }

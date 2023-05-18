@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import domain.repository.TestRepository
 
 class OpenCatalogUseCase (private val testRepository: TestRepository) {
-    fun openCatalog(): LiveData<List<String>> {
+    suspend fun openCatalog(): List<String> {
         return testRepository.openCatalog()
     }
 }

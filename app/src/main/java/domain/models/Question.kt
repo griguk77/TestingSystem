@@ -4,5 +4,5 @@ data class Question(
     var queNum: Int,
     var queText: String,
     var variants: List<String>,
-    var points: List<Int>
+    var points: List<Double>
 )

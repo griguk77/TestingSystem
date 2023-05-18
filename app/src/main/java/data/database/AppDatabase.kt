@@ -9,7 +9,11 @@ import data.models.Test
 import data.models.Result
 import data.models.TextResult
 
-@Database(entities = [Test::class, Question::class, Result::class, TextResult::class], version = 1, exportSchema = false)
+@Database(
+    entities = [Test::class, Question::class, Result::class, TextResult::class],
+    version = 5,
+    exportSchema = false
+)
 abstract class AppDatabase : RoomDatabase() {
     companion object {
         private var db: AppDatabase? = null
@@ -23,11 +27,13 @@ abstract class AppDatabase : RoomDatabase() {
                     context,
                     AppDatabase::class.java,
                     DB_NAME
-                ).build()
+                ).fallbackToDestructiveMigration()
+                    .build()
                 db = instance
                 return instance
             }
         }
     }
+
     abstract fun testDao(): TestDao
 }

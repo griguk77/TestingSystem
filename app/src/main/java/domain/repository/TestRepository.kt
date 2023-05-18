@@ -5,21 +5,19 @@ import domain.models.*
 
 interface TestRepository {
 
-    fun chooseTest(testName: String): LiveData<String>
+    suspend fun chooseTest(testName: String): String
 
-    fun continueTest(testName: String, queNum: Int): LiveData<Question>
+    suspend fun continueTest(testName: String, queNum: Int): Question
 
-    fun finishTest(testName: String, point: Int, userName: String): LiveData<String>
+    suspend fun finishTest(testName: String, point: Int, userName: String): String
 
-    fun login(user: User)
+    fun login(user: User): Boolean
 
-    fun registr(user: User)
+    fun registr(user: User): Boolean
 
-    fun showAllResults(testName: String): LiveData<List<Result>>
+    suspend fun showAllResults(testName: String): List<Result>
 
-    fun startTest(testName: String): LiveData<Question>
+    suspend fun openCatalog(): List<String>
 
-    fun openCatalog(): LiveData<List<String>>
-
-    fun getCountQue(testName: String): LiveData<Int>
+    suspend fun getCountQue(testName: String): Int
 }
