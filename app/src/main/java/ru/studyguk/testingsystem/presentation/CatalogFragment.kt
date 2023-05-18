@@ -29,6 +29,7 @@ class CatalogFragment : Fragment(), TestAdapter.OnItemClickListener {
     private lateinit var binding: FragmentCatalogBinding
     private var param1: String? = null
     private var param2: String? = null
+    private var backPressedTime = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,13 +56,22 @@ class CatalogFragment : Fragment(), TestAdapter.OnItemClickListener {
         }
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                FirebaseAuth.getInstance().signOut()
-                Snackbar.make(
-                    view,
-                    "Вы вышли из аккаунта",
-                    Snackbar.LENGTH_SHORT
-                ).show()
-                findNavController().navigate(R.id.action_catalogFragment_to_loginFragment)
+                if (backPressedTime + 2000 > System.currentTimeMillis()) {
+                    FirebaseAuth.getInstance().signOut()
+                    Snackbar.make(
+                        view,
+                        "Вы вышли из аккаунта",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                    findNavController().navigate(R.id.action_catalogFragment_to_loginFragment)
+                } else {
+                    Snackbar.make(
+                        view,
+                        "Для выхода нажмите ещё раз",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+                backPressedTime = System.currentTimeMillis()
             }
         }
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, callback)

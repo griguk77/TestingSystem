@@ -2,7 +2,6 @@ package domain.repository
 
 import androidx.lifecycle.LiveData
 import domain.models.*
-import kotlinx.coroutines.flow.Flow
 
 interface TestRepository {
 
@@ -12,7 +11,7 @@ interface TestRepository {
 
     suspend fun finishTest(testName: String, point: Int, userName: String): String
 
-    fun login(user: User): Flow<Boolean>
+    fun login(user: User): Boolean
 
     fun registr(user: User): Boolean
 

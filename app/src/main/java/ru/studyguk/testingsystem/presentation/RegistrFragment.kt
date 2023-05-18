@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 import domain.models.User
 import ru.studyguk.testingsystem.R
 import ru.studyguk.testingsystem.databinding.FragmentRegistrBinding
@@ -23,6 +24,7 @@ private const val ARG_PARAM2 = "param2"
 class RegistrFragment : Fragment() {
     private val vm: MainViewModel by activityViewModels { MainViewModelFactory(requireActivity().application, requireActivity()) }
     private lateinit var binding: FragmentRegistrBinding
+    private var auth = FirebaseAuth.getInstance()
     private var param1: String? = null
     private var param2: String? = null
 
@@ -50,6 +52,16 @@ class RegistrFragment : Fragment() {
                     "Заполните все поля ввода",
                     Snackbar.LENGTH_SHORT
                 ).show()
+                binding.progressBarRegistr.visibility = GONE
+                return@setOnClickListener
+            }
+            if (password.length < 6) {
+                Snackbar.make(
+                    view,
+                    "Пароль должен содержать хотя бы 6 символов",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+                binding.progressBarRegistr.visibility = GONE
                 return@setOnClickListener
             }
             if (repeatPassword != password) {
@@ -58,28 +70,43 @@ class RegistrFragment : Fragment() {
                     "Пароли не совпадают, проверьте введённые данные",
                     Snackbar.LENGTH_SHORT
                 ).show()
+                binding.progressBarRegistr.visibility = GONE
                 return@setOnClickListener
             }
-            val user = User(
-                email,
-                password
-            )
-            vm.registr(user)
-            binding.progressBarRegistr.visibility = GONE
-            if (vm.success.value == true) {
-                Snackbar.make(
-                    view,
-                    "Пользователь ${vm.userName.value.toString()} успешно зарегистрирован",
-                    Snackbar.LENGTH_SHORT
-                ).show()
-                findNavController().navigate(R.id.action_registrFragment_to_loginFragment)
-            } else {
-                Snackbar.make(
-                    view,
-                    "Регистрация не выполнена, проверьте введённые данные",
-                    Snackbar.LENGTH_SHORT
-                ).show()
-            }
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(requireActivity()) { task ->
+                    binding.progressBarRegistr.visibility = GONE
+                    if (task.isSuccessful) {
+                        vm.login(email)
+                        Snackbar.make(
+                            view,
+                            "Пользователь ${vm.userName.value.toString()} успешно зарегистрирован",
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                        findNavController().navigate(R.id.action_registrFragment_to_loginFragment)
+                    } else {
+                        Snackbar.make(
+                            view,
+                            "Регистрация не выполнена, проверьте введённые данные",
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+//            binding.progressBarRegistr.visibility = GONE
+//            if (vm.success.value == true) {
+//                Snackbar.make(
+//                    view,
+//                    "Пользователь ${vm.userName.value.toString()} успешно зарегистрирован",
+//                    Snackbar.LENGTH_SHORT
+//                ).show()
+//                findNavController().navigate(R.id.action_registrFragment_to_loginFragment)
+//            } else {
+//                Snackbar.make(
+//                    view,
+//                    "Регистрация не выполнена, проверьте введённые данные",
+//                    Snackbar.LENGTH_SHORT
+//                ).show()
+//            }
         }
         super.onViewCreated(view, savedInstanceState)
     }

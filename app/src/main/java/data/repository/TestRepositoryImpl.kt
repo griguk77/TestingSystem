@@ -14,8 +14,6 @@ import domain.models.Question
 import domain.models.Result
 import domain.models.User
 import domain.repository.TestRepository
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import java.lang.Exception
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -41,19 +39,19 @@ class TestRepositoryImpl(private val application: Application, private val activ
         return db.testDao().getTextResult(testName, point)
     }
 
-    override fun login(user: User): StateFlow<Boolean> {
-        val loginState = MutableStateFlow(false)
+    override fun login(user: User): Boolean {
+        var success = false
         auth.signInWithEmailAndPassword(user.name, user.password)
             .addOnCompleteListener(activity) { task ->
-                Log.d("RRR", "${task.isSuccessful}")
-                loginState.value = task.isSuccessful
                 if (task.isSuccessful) {
-                    Log.d("RRR", "success = ")
+                    success = true
+                    Log.d("RRR", "success = $success")
                 } else {
                     Log.d("RRR", "не успех")
                 }
             }
-        return loginState
+        Log.d("RRR", success.toString())
+        return success
     }
 
     override fun registr(user: User): Boolean {
