@@ -11,10 +11,6 @@ interface TestRepository {
 
     suspend fun finishTest(testName: String, point: Int, userName: String): String
 
-    fun login(user: User): Boolean
-
-    fun registr(user: User): Boolean
-
     suspend fun showAllResults(testName: String): List<Result>
 
     suspend fun openCatalog(): List<String>

@@ -1,12 +1,10 @@
 package ru.studyguk.testingsystem.presentation.adapter
 
-import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import data.models.Test
 import ru.studyguk.testingsystem.R
 
 class TestAdapter(val list: List<String>, val listener: OnItemClickListener) :

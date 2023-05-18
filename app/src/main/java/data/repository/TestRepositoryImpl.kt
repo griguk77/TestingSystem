@@ -1,25 +1,16 @@
 package data.repository
 
 import android.app.Application
-import android.util.Log
-import android.widget.Toast
-import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.google.firebase.auth.FirebaseAuth
 import data.database.AppDatabase
 import data.models.Test
 import data.models.TextResult
 import domain.models.Question
 import domain.models.Result
-import domain.models.User
 import domain.repository.TestRepository
-import java.lang.Exception
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class TestRepositoryImpl(private val application: Application, private val activity: FragmentActivity) : TestRepository {
-    private var auth = FirebaseAuth.getInstance()
+class TestRepositoryImpl(private val application: Application) : TestRepository {
     private var db = AppDatabase.getInstance(application)
 
     override suspend fun chooseTest(testName: String): String {
@@ -37,36 +28,6 @@ class TestRepositoryImpl(private val application: Application, private val activ
             .toString()
         db.testDao().insertResult(data.models.Result(0, testName, userName, point, date))
         return db.testDao().getTextResult(testName, point)
-    }
-
-    override fun login(user: User): Boolean {
-        var success = false
-        auth.signInWithEmailAndPassword(user.name, user.password)
-            .addOnCompleteListener(activity) { task ->
-                if (task.isSuccessful) {
-                    success = true
-                    Log.d("RRR", "success = $success")
-                } else {
-                    Log.d("RRR", "не успех")
-                }
-            }
-        Log.d("RRR", success.toString())
-        return success
-    }
-
-    override fun registr(user: User): Boolean {
-        var success = false
-        auth.createUserWithEmailAndPassword(user.name, user.password)
-            .addOnCompleteListener(activity) { task ->
-                if (task.isSuccessful) {
-                    Log.d("RRR", "успех")
-                    success = true
-                } else {
-                    Log.d("RRR", "не успех")
-                }
-            }
-        Log.d("RRR", success.toString())
-        return success
     }
 
     override suspend fun showAllResults(testName: String): List<Result> {
@@ -112,7 +73,6 @@ class TestRepositoryImpl(private val application: Application, private val activ
 
     override suspend fun openCatalog(): List<String> {
         if (db.testDao().getCatalog().isEmpty()) {
-            //Log.d("RRR", "пусто")
             db.testDao().insertTest(
                 Test(
                     "Математика",
@@ -1183,8 +1143,6 @@ class TestRepositoryImpl(private val application: Application, private val activ
                             " человека"
                 )
             )
-        } else {
-            //Log.d("RRR", "не пусто")
         }
         return db.testDao().getCatalog()
     }
