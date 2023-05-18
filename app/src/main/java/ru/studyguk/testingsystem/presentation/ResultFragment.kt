@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import ru.studyguk.testingsystem.R
@@ -41,11 +42,6 @@ class ResultFragment : Fragment() {
         vm.pointsResult.observe(viewLifecycleOwner) {
             val result = "Результат теста: ${Math.round(it).toInt()}"
             binding.textViewResult.text = result
-            vm.testName.value?.let { it1 -> vm.userName.value?.let { it2 ->
-                vm.getTextResult(it1, Math.round(it).toInt(), it2)
-                Log.d("RRR", "Имя = $it2, тест = $it1, баллы = $it")
-                Log.d("RRR", "${vm.textResult.value}")
-            } }
         }
         vm.textResult.observe(viewLifecycleOwner) {
             binding.textViewResultText.text = vm.textResult.value
@@ -56,6 +52,12 @@ class ResultFragment : Fragment() {
         binding.buttonToCatalog.setOnClickListener {
             findNavController().navigate(R.id.action_resultFragment_to_catalogFragment)
         }
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                findNavController().navigate(R.id.action_resultFragment_to_catalogFragment)
+            }
+        }
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, callback)
         super.onViewCreated(view, savedInstanceState)
     }
 }

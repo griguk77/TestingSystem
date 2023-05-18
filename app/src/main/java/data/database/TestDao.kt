@@ -41,7 +41,4 @@ interface TestDao {
 
     @Query("SELECT queCount FROM test WHERE name == :testName LIMIT 1")
     suspend fun getQueCount(testName: String): Int
-
-    @Query("SELECT id FROM result WHERE testName == :testName ORDER BY id DESC LIMIT 1")
-    suspend fun getResultId(testName: String): Int
 }

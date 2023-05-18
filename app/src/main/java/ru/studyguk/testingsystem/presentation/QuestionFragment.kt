@@ -18,7 +18,7 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 class QuestionFragment : Fragment() {
-    private val vm: MainViewModel by activityViewModels{ MainViewModelFactory(requireActivity().application) }
+    private val vm: MainViewModel by activityViewModels { MainViewModelFactory(requireActivity().application) }
     private lateinit var binding: FragmentQuestionBinding
     private var param1: String? = null
     private var param2: String? = null
@@ -65,15 +65,22 @@ class QuestionFragment : Fragment() {
                 pointResult += vm.question.value?.points?.get(3) ?: 0.0
             }
             vm.setPoints(pointResult + (vm.pointsResult.value ?: 0.0))
-            //Log.d("RRR", "промежуточное = $pointResult")
-            //Log.d("RRR", "итоговое = ${vm.pointsResult.value.toString()}")
             if (vm.queCount.value == vm.question.value?.queNum) {
-//                vm.pointsResult.value?.times(10.0)?.let { it1 -> floor(it1.div(10.0)) }
-//                    ?.let { it2 -> vm.setPoints(it2) }
-                //Log.d("RRR", "конечное = ${vm.pointsResult.value.toString()}")
+                vm.testName.value?.let { it1 ->
+                    vm.userName.value?.let { it2 ->
+                        vm.pointsResult.value?.let { it3 -> Math.round(it3).toInt() }?.let { it4 ->
+                            vm.getTextResult(it1, it4, it2)
+                        }
+                    }
+                }
                 findNavController().navigate(R.id.action_questionFragment_to_resultFragment)
             } else {
-                vm.testName.value?.let { it1 -> vm.getQuestion(it1, (vm.question.value?.queNum?.plus(1) ?: 1)) }
+                vm.testName.value?.let { it1 ->
+                    vm.getQuestion(
+                        it1,
+                        (vm.question.value?.queNum?.plus(1) ?: 1)
+                    )
+                }
             }
         }
         super.onViewCreated(view, savedInstanceState)
