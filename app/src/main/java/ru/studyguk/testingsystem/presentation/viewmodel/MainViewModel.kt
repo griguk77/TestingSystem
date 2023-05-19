@@ -84,6 +84,15 @@ class MainViewModel(
         _pointsResult.value = points
     }
 
+    fun checkPoints() {
+        if (_pointsResult.value != null && _pointsResult.value!! < -100.0) {
+            _pointsResult.value = -100.0
+        }
+        if (_pointsResult.value != null && _pointsResult.value!! > 100.0) {
+            _pointsResult.value = 100.0
+        }
+    }
+
     fun getTextResult(nameTest: String, points: Int, nameUser: String) {
         viewModelScope.launch {
             _textResult.value = finishTestUseCase.finishTest(nameTest, points, nameUser)

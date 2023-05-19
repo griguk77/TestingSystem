@@ -59,6 +59,7 @@ class QuestionFragment : Fragment() {
             }
             vm.setPoints(pointResult + (vm.pointsResult.value ?: 0.0))
             if (vm.queCount.value == vm.question.value?.queNum) {
+                vm.checkPoints()
                 vm.testName.value?.let { it1 ->
                     vm.userName.value?.let { it2 ->
                         vm.pointsResult.value?.let { it3 -> Math.round(it3).toInt() }?.let { it4 ->
