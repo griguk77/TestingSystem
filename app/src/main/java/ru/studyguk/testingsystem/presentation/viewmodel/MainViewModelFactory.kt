@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import data.repository.TestRepositoryImpl
 import domain.usecases.*
 
-class MainViewModelFactory(private val application: Application): ViewModelProvider.Factory {
+class MainViewModelFactory(private val application: Application) : ViewModelProvider.Factory {
 
     private val testRepository by lazy(LazyThreadSafetyMode.NONE) {
         TestRepositoryImpl(application)
@@ -28,16 +28,8 @@ class MainViewModelFactory(private val application: Application): ViewModelProvi
         GetCountQueUseCase(testRepository)
     }
 
-    private val loginUseCase by lazy(LazyThreadSafetyMode.NONE) {
-        LoginUseCase(testRepository)
-    }
-
     private val openCatalogUseCase by lazy(LazyThreadSafetyMode.NONE) {
         OpenCatalogUseCase(testRepository)
-    }
-
-    private val registrUseCase by lazy(LazyThreadSafetyMode.NONE) {
-        RegistrUseCase(testRepository)
     }
 
     private val showAllResultsUseCase by lazy(LazyThreadSafetyMode.NONE) {
@@ -50,9 +42,7 @@ class MainViewModelFactory(private val application: Application): ViewModelProvi
             continueTestUseCase,
             finishTestUseCase,
             getCountQueUseCase,
-            loginUseCase,
             openCatalogUseCase,
-            registrUseCase,
             showAllResultsUseCase
         ) as T
     }

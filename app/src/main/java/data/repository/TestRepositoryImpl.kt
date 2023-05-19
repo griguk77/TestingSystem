@@ -1,15 +1,11 @@
 package data.repository
 
 import android.app.Application
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import data.database.AppDatabase
 import data.models.Test
 import data.models.TextResult
 import domain.models.Question
 import domain.models.Result
-import domain.models.User
 import domain.repository.TestRepository
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -32,14 +28,6 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
             .toString()
         db.testDao().insertResult(data.models.Result(0, testName, userName, point, date))
         return db.testDao().getTextResult(testName, point)
-    }
-
-    override fun login(user: User): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun registr(user: User): Boolean {
-        TODO("Not yet implemented")
     }
 
     override suspend fun showAllResults(testName: String): List<Result> {
@@ -85,7 +73,6 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
 
     override suspend fun openCatalog(): List<String> {
         if (db.testDao().getCatalog().isEmpty()) {
-            //Log.d("RRR", "пусто")
             db.testDao().insertTest(
                 Test(
                     "Математика",
@@ -1156,8 +1143,6 @@ class TestRepositoryImpl(private val application: Application) : TestRepository 
                             " человека"
                 )
             )
-        } else {
-            //Log.d("RRR", "не пусто")
         }
         return db.testDao().getCatalog()
     }

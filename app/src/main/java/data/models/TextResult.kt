@@ -5,7 +5,8 @@ import androidx.room.ForeignKey
 import androidx.room.ForeignKey.Companion.CASCADE
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "text_result",
+@Entity(
+    tableName = "text_result",
     foreignKeys = [
         ForeignKey(
             entity = Test::class,

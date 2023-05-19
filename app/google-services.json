@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "552053439754",
+    "project_id": "testing-system-7cb17",
+    "storage_bucket": "testing-system-7cb17.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:552053439754:android:77bf452ac2f903016d8ef3",
+        "android_client_info": {
+          "package_name": "ru.studyguk.testingsystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "552053439754-504t4u8iagb9kqk6a6t01r9b1p24p3g8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_6wDAjF40yVOQYkkvwVJXLsVkc0Utl1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "552053439754-504t4u8iagb9kqk6a6t01r9b1p24p3g8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

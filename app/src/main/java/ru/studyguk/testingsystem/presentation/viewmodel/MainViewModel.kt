@@ -1,12 +1,10 @@
 package ru.studyguk.testingsystem.presentation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import domain.models.Question
-import domain.models.User
 import domain.usecases.*
 import kotlinx.coroutines.launch
 
@@ -15,17 +13,12 @@ class MainViewModel(
     private val continueTestUseCase: ContinueTestUseCase,
     private val finishTestUseCase: FinishTestUseCase,
     private val getCountQueUseCase: GetCountQueUseCase,
-    private val loginUseCase: LoginUseCase,
     private val openCatalogUseCase: OpenCatalogUseCase,
-    private val registrUseCase: RegistrUseCase,
     private val showAllResultsUseCase: ShowAllResultsUseCase
 ) : ViewModel() {
 
     private val _userName = MutableLiveData<String>()
     val userName: LiveData<String> = _userName
-
-    private val _success = MutableLiveData<Boolean>()
-    val success: LiveData<Boolean> = _success
 
     private val _catalog = MutableLiveData<List<String>>()
     var catalog: LiveData<List<String>> = _catalog
@@ -51,20 +44,8 @@ class MainViewModel(
     private val _results = MutableLiveData<List<domain.models.Result>>()
     var results: LiveData<List<domain.models.Result>> = _results
 
-    fun login(user: User) {
-        //_success = loginUseCase.login(user)
-        _success.value = true
-        if (_success.value == true) {
-            _userName.value = user.name.substringBefore('@')
-        }
-    }
-
-    fun registr(user: User) {
-        //_success = registrUseCase.registr(user)
-        _success.value = true
-        if (_success.value == true) {
-            _userName.value = user.name.substringBefore('@')
-        }
+    fun login(user: String) {
+        _userName.value = user.substringBefore('@')
     }
 
     fun showCatalog() {
