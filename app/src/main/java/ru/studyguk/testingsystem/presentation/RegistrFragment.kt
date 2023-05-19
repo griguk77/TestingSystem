@@ -49,20 +49,12 @@ class RegistrFragment : Fragment() {
                 return@setOnClickListener
             }
             if (password.length < 6) {
-                Snackbar.make(
-                    view,
-                    "Пароль должен содержать хотя бы 6 символов",
-                    Snackbar.LENGTH_SHORT
-                ).show()
+                binding.editTextTextPasswordRegistr.error = "Пароль должен содержать хотя бы 6 символов"
                 binding.progressBarRegistr.visibility = GONE
                 return@setOnClickListener
             }
             if (repeatPassword != password) {
-                Snackbar.make(
-                    view,
-                    "Пароли не совпадают, проверьте введённые данные",
-                    Snackbar.LENGTH_SHORT
-                ).show()
+                binding.editTextTextRepeatPassword.error = "Пароли не совпадают, проверьте введённые данные"
                 binding.progressBarRegistr.visibility = GONE
                 return@setOnClickListener
             }
